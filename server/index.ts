@@ -61,7 +61,9 @@ app.use((req, res, next) => {
 
   // Try to serve the app on port 5000, fallback to other ports if needed
   // this serves both the API and the client
-  const port = process.env.PORT ? parseInt(process.env.PORT) : 5000;
+  // const port = process.env.PORT ? parseInt(process.env.PORT) : 5000;
+  const isReplit = process.env.REPL_ID !== undefined;
+  const port = process.env.PORT ? parseInt(process.env.PORT) : (isReplit ? 5000 : 3000);
   
   // For local development, try alternative ports if 5000 is occupied
   const startServer = (currentPort: number, maxRetries = 3) => {
